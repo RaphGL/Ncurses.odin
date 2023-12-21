@@ -7,7 +7,7 @@ foreign import ncurses "system:ncurses"
 NCURSES_ATTR_SHIFT :: 8
 
 @(private = "file")
-ncurses_bits :: proc(mask, shift: c.uint) -> c.uint {
+ncurses_bits :: #force_inline proc(mask, shift: c.uint) -> c.uint {
     return mask << (shift + NCURSES_ATTR_SHIFT)
 }
 

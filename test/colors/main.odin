@@ -25,7 +25,8 @@ main :: proc() {
         nc.attroff(COLOR_1)
 
         nc.attron(COLOR_2)
-        nc.mvprintw(11, 10, "LOREM IPSUM 2")
+        nc.move(11, 10)
+        nc.printw("LOREM IPSUM 2")
         nc.attroff(COLOR_2)
 
         nc.refresh()

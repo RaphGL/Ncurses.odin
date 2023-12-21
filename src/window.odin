@@ -5,15 +5,26 @@ foreign import ncurses "system:ncurses"
 
 @(private)
 foreign ncurses {
-	getattrs :: proc(win: ^Window) -> c.int --- /* generated */
-	getcurx :: proc(win: ^Window) -> c.int --- /* generated */
-	getcury :: proc(win: ^Window) -> c.int --- /* generated */
-	getbegx :: proc(win: ^Window) -> c.int --- /* generated */
-	getbegy :: proc(win: ^Window) -> c.int --- /* generated */
-	getmaxx :: proc(win: ^Window) -> c.int --- /* generated */
-	getmaxy :: proc(win: ^Window) -> c.int --- /* generated */
-	getparx :: proc(win: ^Window) -> c.int --- /* generated */
-	getpary :: proc(win: ^Window) -> c.int --- /* generated */
+	getattrs :: proc(win: ^Window) -> c.int ---
+	getcurx :: proc(win: ^Window) -> c.int ---
+	getcury :: proc(win: ^Window) -> c.int ---
+	getbegx :: proc(win: ^Window) -> c.int ---
+	getbegy :: proc(win: ^Window) -> c.int ---
+	getmaxx :: proc(win: ^Window) -> c.int ---
+	getmaxy :: proc(win: ^Window) -> c.int ---
+	getparx :: proc(win: ^Window) -> c.int ---
+	getpary :: proc(win: ^Window) -> c.int ---
+}
+
+foreign ncurses {
+	stdscr: ^Window
+
+	newwin :: proc(h, w, y, x: c.int) -> ^Window ---
+	delwin :: proc(win: ^Window) -> c.int ---
+
+	box :: proc(win: ^Window, verch, horch: c.int) ---
+	border :: proc(ls, rs, ts, bs, tl, tr, bl, br: c.int) ---
+	wborder :: proc(win: ^Window, ls, rs, ts, bs, tl, tr, bl, br: c.int) ---
 }
 
 getyx :: proc(win: ^Window) -> (y, x: c.int) {return getcury(win), getcurx(win)}

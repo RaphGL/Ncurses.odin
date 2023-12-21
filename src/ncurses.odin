@@ -10,7 +10,6 @@ Window :: _win_st
 
 foreign ncurses {
     initscr :: proc() -> ^Window ---
-    keypad :: proc(win: ^Window, enable: bool) -> c.int ---
     halfdelay :: proc(timeout: c.int) -> c.int ---
 
     printw :: proc(fmt: cstring, #c_vararg args: ..any) -> c.int ---
@@ -24,7 +23,6 @@ foreign ncurses {
     refresh :: proc() -> c.int ---
     wrefresh :: proc(win: ^Window) -> c.int ---
 
-    getch :: proc() -> c.int ---
     endwin :: proc() -> c.int ---
 
     raw :: proc() -> c.int ---
@@ -35,4 +33,6 @@ foreign ncurses {
 
     echo :: proc() -> c.int ---
     noecho :: proc() -> c.int ---
+
+    curs_set :: proc(visibility: c.int) -> c.int ---
 }
