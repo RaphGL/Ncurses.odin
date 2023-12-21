@@ -8,31 +8,30 @@ NCURSES_ATTR_SHIFT :: 8
 
 @(private = "file")
 ncurses_bits :: proc(mask, shift: c.uint) -> c.uint {
-	return mask << (shift + NCURSES_ATTR_SHIFT)
+    return mask << (shift + NCURSES_ATTR_SHIFT)
 }
 
-Attribute :: distinct c.uint
 // -- Attributes
-A_NORMAL := Attribute(c.uint(1) - c.uint(1))
-A_ATTRIBUTES := Attribute(ncurses_bits(~(c.uint(1) - c.uint(1)), 0))
-A_CHARTEXT := Attribute(ncurses_bits(1, 0) - 1)
-A_COLOR := Attribute(ncurses_bits((c.uint(1) << 8) - c.uint(1), 0))
-A_STANDOUT := Attribute(ncurses_bits(1, 8))
-A_UNDERLINE := Attribute(ncurses_bits(1, 9))
-A_REVERSE := Attribute(ncurses_bits(1, 10))
-A_BLINK := Attribute(ncurses_bits(1, 11))
-A_DIM := Attribute(ncurses_bits(1, 12))
-A_BOLD := Attribute(ncurses_bits(1, 13))
-A_ALTCHARSET := Attribute(ncurses_bits(1, 14))
-A_INVIS := Attribute(ncurses_bits(1, 15))
-A_PROTECT := Attribute(ncurses_bits(1, 16))
-A_HORIZONTAL := Attribute(ncurses_bits(1, 17))
-A_LEFT := Attribute(ncurses_bits(1, 18))
-A_LOW := Attribute(ncurses_bits(1, 19))
-A_RIGHT := Attribute(ncurses_bits(1, 20))
-A_TOP := Attribute(ncurses_bits(1, 21))
-A_VERTICAL := Attribute(ncurses_bits(1, 22))
-A_ITALIC := Attribute(ncurses_bits(1, 23)) /* ncurses extension */
+A_NORMAL := c.uint(1) - c.uint(1)
+A_ATTRIBUTES := ncurses_bits(~(c.uint(1) - c.uint(1)), 0)
+A_CHARTEXT := ncurses_bits(1, 0) - 1
+A_COLOR := ncurses_bits((c.uint(1) << 8) - c.uint(1), 0)
+A_STANDOUT := ncurses_bits(1, 8)
+A_UNDERLINE := ncurses_bits(1, 9)
+A_REVERSE := ncurses_bits(1, 10)
+A_BLINK := ncurses_bits(1, 11)
+A_DIM := ncurses_bits(1, 12)
+A_BOLD := ncurses_bits(1, 13)
+A_ALTCHARSET := ncurses_bits(1, 14)
+A_INVIS := ncurses_bits(1, 15)
+A_PROTECT := ncurses_bits(1, 16)
+A_HORIZONTAL := ncurses_bits(1, 17)
+A_LEFT := ncurses_bits(1, 18)
+A_LOW := ncurses_bits(1, 19)
+A_RIGHT := ncurses_bits(1, 20)
+A_TOP := ncurses_bits(1, 21)
+A_VERTICAL := ncurses_bits(1, 22)
+A_ITALIC := ncurses_bits(1, 23) /* ncurses extension */
 
 // -- X/Open Attributes
 // They're equivalent to the A_ attributes on ncurses
@@ -56,36 +55,36 @@ WA_VERTICAL := A_VERTICAL
 WA_ITALIC := A_ITALIC /* ncurses extension */
 
 // -- Integers
-ColorInt :: c.short
 PairInt :: c.short
 
 // -- Colors
-Color :: enum ColorInt {
-	Black   = 0,
-	Red     = 1,
-	Green   = 2,
-	Yellow  = 3,
-	Blue    = 4,
-	Magenta = 5,
-	Cyan    = 6,
-	White   = 7,
-}
+COLOR_BLACK :: 0
+COLOR_RED :: 1
+COLOR_GREEN :: 2
+COLOR_YELLOW :: 3
+COLOR_BLUE :: 4
+COLOR_MAGENTA :: 5
+COLOR_CYAN :: 6
+COLOR_WHITE :: 7
 
 foreign ncurses {
-	attron :: proc(attr: Attribute) -> c.int ---
-	attroff :: proc(attr: Attribute) -> c.int ---
-	attrset :: proc(attr: Attribute) -> c.int ---
-	wattron :: proc(win: ^Window, attr: Attribute) -> c.int ---
-	wattroff :: proc(win: ^Window, attr: Attribute) -> c.int ---
-	wattrset :: proc(win: ^Window, attr: Attribute) -> c.int ---
+    attron :: proc(attr: c.int) -> c.int ---
+    attroff :: proc(attr: c.int) -> c.int ---
+    attrset :: proc(attr: c.int) -> c.int ---
+    wattron :: proc(win: ^Window, attr: c.int) -> c.int ---
+    wattroff :: proc(win: ^Window, attr: c.int) -> c.int ---
+    wattrset :: proc(win: ^Window, attr: c.int) -> c.int ---
 
-	attr_on :: proc() --- // TODO
-	attr_off :: proc() --- // TODO
-	attr_set :: proc() --- // TODO
-	wattr_on :: proc() --- // TODO
-	wattr_off :: proc() --- // TODO
-	wattr_set :: proc() --- // TODO
+    attr_on :: proc() --- // TODO
+    attr_off :: proc() --- // TODO
+    attr_set :: proc() --- // TODO
+    wattr_on :: proc() --- // TODO
+    wattr_off :: proc() --- // TODO
+    wattr_set :: proc() --- // TODO
 
-	init_color :: proc(color, r, g, b: ColorInt) -> c.int ---
-	init_pair :: proc(pair_id, fg, bg: PairInt) -> c.int ---
+    init_color :: proc(color, r, g, b: c.short) -> c.int ---
+    init_pair :: proc(pair_id, fg, bg: c.short) -> c.int ---
+    has_colors :: proc() -> c.bool ---
+    start_color :: proc() -> c.int ---
+    COLOR_PAIR :: proc(pair_id: c.int) -> c.int ---
 }

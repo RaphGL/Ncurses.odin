@@ -15,7 +15,7 @@ foreign ncurses {
 
     printw :: proc(fmt: cstring, #c_vararg args: ..any) -> c.int ---
     wprintw :: proc(win: ^Window, fmt: cstring, #c_vararg args: ..any) -> c.int ---
-    mvprintw :: proc(y: c.int, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+    mvprintw :: proc(y, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
     mvwprintw :: proc(win: ^Window, y, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
 
     move :: proc(y, x: c.int) -> c.int ---
