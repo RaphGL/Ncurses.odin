@@ -7,12 +7,12 @@ foreign import ncurses "system:ncurses"
 NCURSES_ATTR_SHIFT :: 8
 
 @(private = "file")
-ncurses_bits :: #force_inline proc(mask, shift: c.uint) -> c.uint {
-	return mask << (shift + NCURSES_ATTR_SHIFT)
+ncurses_bits :: #force_inline proc(mask, shift: c.uint) -> c.int {
+	return c.int(mask << (shift + NCURSES_ATTR_SHIFT))
 }
 
 // -- Attributes
-A_NORMAL := c.uint(1) - c.uint(1)
+A_NORMAL := c.int(c.uint(1) - c.uint(1))
 A_ATTRIBUTES := ncurses_bits(~(c.uint(1) - c.uint(1)), 0)
 A_CHARTEXT := ncurses_bits(1, 0) - 1
 A_COLOR := ncurses_bits((c.uint(1) << 8) - c.uint(1), 0)
@@ -54,18 +54,16 @@ WA_TOP := A_TOP
 WA_VERTICAL := A_VERTICAL
 WA_ITALIC := A_ITALIC /* ncurses extension */
 
-// -- Integers
-PairInt :: c.short
-
-// -- Colors
-COLOR_BLACK :: 0
-COLOR_RED :: 1
-COLOR_GREEN :: 2
-COLOR_YELLOW :: 3
-COLOR_BLUE :: 4
-COLOR_MAGENTA :: 5
-COLOR_CYAN :: 6
-COLOR_WHITE :: 7
+Color :: enum c.int {
+	Black   = 0,
+	Red     = 1,
+	Green   = 2,
+	Yellow  = 3,
+	Blue    = 4,
+	Magenta = 5,
+	Cyan    = 6,
+	White   = 7,
+}
 
 foreign ncurses {
 	attron :: proc(attr: c.int) -> c.int ---
@@ -86,5 +84,6 @@ foreign ncurses {
 	init_pair :: proc(pair_id, fg, bg: c.short) -> c.int ---
 	has_colors :: proc() -> c.bool ---
 	start_color :: proc() -> c.int ---
+	use_default_colors :: proc() -> c.int ---
 	COLOR_PAIR :: proc(pair_id: c.int) -> c.int ---
 }

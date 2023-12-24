@@ -29,6 +29,9 @@ foreign ncurses {
 	clear :: proc() -> c.int ---
 	wclear :: proc(win: ^Window) -> c.int ---
 
+	clrtoeol :: proc() -> c.int ---
+	wclrtoeol :: proc(win: ^Window) -> c.int ---
+
 	erase :: proc() -> c.int ---
 	werase :: proc(win: ^Window) -> c.int ---
 }
