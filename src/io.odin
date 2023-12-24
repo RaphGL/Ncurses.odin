@@ -4,8 +4,52 @@ import "core:c"
 foreign import ncurses "system:ncurses"
 
 foreign ncurses {
-	getch :: proc() -> c.int ---
 	keypad :: proc(win: ^Window, enable: bool) -> c.int ---
+
+	// INPUT
+
+	getch :: proc() -> c.int ---
+	wgetch :: proc(win: ^Window) -> c.int ---
+	mvgetch :: proc(y, x: c.int) -> c.int ---
+	mvwgetch :: proc(win: ^Window, y, x: c.int) -> c.int ---
+
+	getstr :: proc(str: [^]byte) -> c.int ---
+	wgetstr :: proc(win: ^Window, str: [^]byte) -> c.int ---
+	getnstr :: proc(str: [^]byte, n: c.int) -> c.int ---
+	mvgetstr :: proc(y, x: c.int, str: [^]byte) -> c.int ---
+	mvwgetstr :: proc(win: ^Window, y, x: c.int, str: [^]byte) -> c.int ---
+	mvgetnstr :: proc(y, x: c.int, str: [^]byte, n: c.int) -> c.int ---
+	mvwgetnstr :: proc(win: ^Window, y, x: c.int, str: [^]byte, n: c.int) -> c.int ---
+	wgetnstr :: proc(win: ^Window, str: [^]byte, n: c.int) -> c.int ---
+
+	ungetch :: proc(char: c.int) -> c.int ---
+
+	scanw :: proc(fmt: cstring, #c_vararg args: ..any) -> c.int ---
+	wscanw :: proc(win: ^Window, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+	mvscanw :: proc(y, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+	mvwscanw :: proc(win: ^Window, y, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+
+
+	// OUTPUT 
+
+	printw :: proc(fmt: cstring, #c_vararg args: ..any) -> c.int ---
+	wprintw :: proc(win: ^Window, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+	mvprintw :: proc(y, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+	mvwprintw :: proc(win: ^Window, y, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+
+	addch :: proc(char: c.uint) -> c.int ---
+	waddch :: proc(win: ^Window, char: c.uint) -> c.int ---
+	mvaddch :: proc(y, x: c.int, char: c.uint) -> c.int ---
+	mvwaddch :: proc(win: ^Window, y, x: c.int, char: c.uint) -> c.int ---
+
+	addstr :: proc(str: cstring) -> c.int ---
+	waddstr :: proc(win: ^Window, str: cstring) -> c.int ---
+	mvaddstr :: proc(y, x: c.int, str: cstring) -> c.int ---
+	mvwaddstr :: proc(win: ^Window, y, x: c.int, str: cstring) -> c.int ---
+
+	move :: proc(y, x: c.int) -> c.int ---
+	wmove :: proc(win: ^Window, y, x: c.int) ---
+
 }
 
 // down-arrow key 

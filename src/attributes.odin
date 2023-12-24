@@ -8,7 +8,7 @@ NCURSES_ATTR_SHIFT :: 8
 
 @(private = "file")
 ncurses_bits :: #force_inline proc(mask, shift: c.uint) -> c.uint {
-    return mask << (shift + NCURSES_ATTR_SHIFT)
+	return mask << (shift + NCURSES_ATTR_SHIFT)
 }
 
 // -- Attributes
@@ -68,23 +68,23 @@ COLOR_CYAN :: 6
 COLOR_WHITE :: 7
 
 foreign ncurses {
-    attron :: proc(attr: c.int) -> c.int ---
-    attroff :: proc(attr: c.int) -> c.int ---
-    attrset :: proc(attr: c.int) -> c.int ---
-    wattron :: proc(win: ^Window, attr: c.int) -> c.int ---
-    wattroff :: proc(win: ^Window, attr: c.int) -> c.int ---
-    wattrset :: proc(win: ^Window, attr: c.int) -> c.int ---
+	attron :: proc(attr: c.int) -> c.int ---
+	attroff :: proc(attr: c.int) -> c.int ---
+	attrset :: proc(attr: c.int) -> c.int ---
+	wattron :: proc(win: ^Window, attr: c.int) -> c.int ---
+	wattroff :: proc(win: ^Window, attr: c.int) -> c.int ---
+	wattrset :: proc(win: ^Window, attr: c.int) -> c.int ---
 
-    attr_on :: proc() --- // TODO
-    attr_off :: proc() --- // TODO
-    attr_set :: proc() --- // TODO
-    wattr_on :: proc() --- // TODO
-    wattr_off :: proc() --- // TODO
-    wattr_set :: proc() --- // TODO
+	attr_on :: proc() --- // TODO
+	attr_off :: proc() --- // TODO
+	attr_set :: proc() --- // TODO
+	wattr_on :: proc() --- // TODO
+	wattr_off :: proc() --- // TODO
+	wattr_set :: proc() --- // TODO
 
-    init_color :: proc(color, r, g, b: c.short) -> c.int ---
-    init_pair :: proc(pair_id, fg, bg: c.short) -> c.int ---
-    has_colors :: proc() -> c.bool ---
-    start_color :: proc() -> c.int ---
-    COLOR_PAIR :: proc(pair_id: c.int) -> c.int ---
+	init_color :: proc(color, r, g, b: c.short) -> c.int ---
+	init_pair :: proc(pair_id, fg, bg: c.short) -> c.int ---
+	has_colors :: proc() -> c.bool ---
+	start_color :: proc() -> c.int ---
+	COLOR_PAIR :: proc(pair_id: c.int) -> c.int ---
 }

@@ -25,6 +25,12 @@ foreign ncurses {
 	box :: proc(win: ^Window, verch, horch: c.int) ---
 	border :: proc(ls, rs, ts, bs, tl, tr, bl, br: c.int) ---
 	wborder :: proc(win: ^Window, ls, rs, ts, bs, tl, tr, bl, br: c.int) ---
+
+	clear :: proc() -> c.int ---
+	wclear :: proc(win: ^Window) -> c.int ---
+
+	erase :: proc() -> c.int ---
+	werase :: proc(win: ^Window) -> c.int ---
 }
 
 getyx :: proc(win: ^Window) -> (y, x: c.int) {return getcury(win), getcurx(win)}
