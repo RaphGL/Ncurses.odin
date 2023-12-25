@@ -4,9 +4,17 @@ import "core:c"
 foreign import ncurses "system:ncurses"
 
 foreign ncurses {
+
+	// Enables the terminal's keypad. 
+	// If enabled, the user can press a function key (such as an arrow key) and wgetch returns a single value representing the function key, as in Key.Left.
+	//
+	// If disabled, curses does not treat function keys specially and the program has to interpret the escape sequences itself.
+	//
+	// If the keypad in the terminal can be turned on (made to transmit) and off (made to work locally), turning on this option causes the terminal keypad to be turned on when wgetch is called.
+	// The default value for keypad is false. 
 	keypad :: proc(win: ^Window, enable: bool) -> c.int ---
 
-	// INPUT
+	// --- INPUT
 
 	getch :: proc() -> c.int ---
 	wgetch :: proc(win: ^Window) -> c.int ---
@@ -30,7 +38,7 @@ foreign ncurses {
 	mvwscanw :: proc(win: ^Window, y, x: c.int, fmt: cstring, #c_vararg args: ..any) -> c.int ---
 
 
-	// OUTPUT 
+	// --- OUTPUT 
 
 	printw :: proc(fmt: cstring, #c_vararg args: ..any) -> c.int ---
 	wprintw :: proc(win: ^Window, fmt: cstring, #c_vararg args: ..any) -> c.int ---
