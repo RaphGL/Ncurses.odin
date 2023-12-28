@@ -32,13 +32,13 @@ main :: proc() {
 
 	for ch := nc.getch(); ch != 'q'; ch = nc.getch() {
 		switch ch {
-		case 'w', c.int(nc.Key.Up):
+		case 'w', nc.KEY_UP:
 			y -= 1
-		case 'a', c.int(nc.Key.Left):
+		case 'a', nc.KEY_LEFT:
 			x -= 1
-		case 's', c.int(nc.Key.Down):
+		case 's', nc.KEY_DOWN:
 			y += 1
-		case 'd', c.int(nc.Key.Right):
+		case 'd', nc.KEY_RIGHT:
 			x += 1
 		}
 

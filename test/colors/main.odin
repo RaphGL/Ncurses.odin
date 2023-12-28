@@ -12,8 +12,8 @@ main :: proc() {
 	defer nc.endwin()
 	if color_support {
 		nc.start_color()
-		nc.init_pair(1, c.short(nc.Color.Red), c.short(nc.Color.Blue))
-		nc.init_pair(2, c.short(nc.Color.Blue), c.short(nc.Color.Green))
+		nc.init_pair(1, nc.COLOR_RED, nc.COLOR_BLUE)
+		nc.init_pair(2, nc.COLOR_BLUE, nc.COLOR_GREEN)
 	}
 
 	COLOR_1 := nc.COLOR_PAIR(1)

@@ -56,16 +56,14 @@ WA_TOP := A_TOP
 WA_VERTICAL := A_VERTICAL
 WA_ITALIC := A_ITALIC
 
-Color :: enum c.int {
-	Black   = 0,
-	Red     = 1,
-	Green   = 2,
-	Yellow  = 3,
-	Blue    = 4,
-	Magenta = 5,
-	Cyan    = 6,
-	White   = 7,
-}
+COLOR_BLACK   :: 0
+COLOR_RED     :: 1
+COLOR_GREEN   :: 2
+COLOR_YELLOW  :: 3
+COLOR_BLUE    :: 4
+COLOR_MAGENTA :: 5
+COLOR_CYAN    :: 6
+COLOR_WHITE   :: 7
 
 foreign ncurses {
 	// Maximum number of colors.

@@ -52,14 +52,14 @@ foreign ncurses {
 	// br: bottom right-hand corner. 
 	//
 	// If any of these arguments is zero, then the corresponding default values are used instead:
-	// ACS.VLine,
-	// ACS.VLine,
-	// ACS.HLine,
-	// ACS.HLine,
-	// ACS.ULcorner,
-	// ACS.URCorner,
-	// ACS.LLCorner,
-	// ACS.LRCorner.
+	// ACS_VLINE,
+	// ACS_VLINE,
+	// ACS_HLINE,
+	// ACS_HLINE,
+	// ACS_ULCORNER,
+	// ACS_URCORNER,
+	// ACS_LLCORNER,
+	// ACS_LRCORNER.
 	border :: proc(ls, rs, ts, bs, tl, tr, bl, br: c.uint) ---
 	// Draw a box around the edges of a window.
 	//
@@ -73,14 +73,14 @@ foreign ncurses {
 	// br: bottom right-hand corner. 
 	//
 	// If any of these arguments is zero, then the corresponding default values are used instead:
-	// ACS.VLine,
-	// ACS.VLine,
-	// ACS.HLine,
-	// ACS.HLine,
-	// ACS.ULcorner,
-	// ACS.URCorner,
-	// ACS.LLCorner,
-	// ACS.LRCorner.
+	// ACS_VLINE,
+	// ACS_VLINE,
+	// ACS_HLINE,
+	// ACS_HLINE,
+	// ACS_ULCORNER,
+	// ACS_URCORNER,
+	// ACS_LLCORNER,
+	// ACS_LRCORNER.
 	wborder :: proc(win: ^Window, ls, rs, ts, bs, tl, tr, bl, br: c.uint) ---
 
 	// The clear and wclear routines are like erase and werase, but they also call clearok,

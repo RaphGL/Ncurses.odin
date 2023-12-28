@@ -30,13 +30,13 @@ main :: proc() {
 	for {
 		char = nc.wgetch(menu_win)
 		switch char {
-		case c.int(nc.Key.Up):
+		case nc.KEY_UP:
 			if highlight == 1 {
 				highlight = len(choices)
 			} else {
 				highlight -= 1
 			}
-		case c.int(nc.Key.Down):
+		case nc.KEY_DOWN:
 			if highlight == len(choices) {
 				highlight = 1
 			} else {
