@@ -6,7 +6,8 @@ foreign import ncurses "system:ncurses"
 
 @(private = "file")
 _win_st :: struct {}
-Window :: _win_st
+
+Window :: distinct _win_st
 
 OK: c.int : 0
 ERR: c.int : -1
