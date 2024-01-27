@@ -3,6 +3,11 @@ package ncurses
 import "core:c"
 foreign import ncurses "system:ncurses"
 
+@(private = "file")
+_win_st :: struct {}
+
+Window :: distinct _win_st
+
 @(private)
 foreign ncurses {
 	acs_map: [^]c.uint
@@ -34,6 +39,11 @@ foreign ncurses {
 	//
 	// Returns an error if the window pointer is null, or if the window is the parent of another window. 
 	delwin :: proc(win: ^Window) -> c.int ---
+
+	// moves the window so that the upper left-hand corner is at position (x, y).
+	// If the move would cause the window to be off the screen, it is an error and the window is not moved.
+	// Moving subwindows is allowed, but should be avoided. 
+	mvwin :: proc(win: ^Window, y, x: c.int) ---
 
 	// Draw a box around the edges of a window.
 	//
@@ -99,6 +109,9 @@ foreign ncurses {
 	erase :: proc() -> c.int ---
 	// Copy blanks to every position in the window, clearing the screen.
 	werase :: proc(win: ^Window) -> c.int ---
+
+	// Resize the window. If either dimension is larger than the current values, the window's data is filled with blanks that have the current background rendition (as set by wbkgndset) merged into them.
+	wresize :: proc(win: ^Window, h, w: c.int) -> c.int ---
 }
 
 // Get the current coordinates of the cursor.
