@@ -58,6 +58,15 @@ foreign ncurses {
 	move :: proc(y, x: c.int) -> c.int ---
 	wmove :: proc(win: ^Window, y, x: c.int) ---
 
+	// Returns a character string corresponding to the key c:
+	//
+    // - Printable characters are displayed as themselves, e.g., a one-character string containing the key.
+    // - Control characters are displayed in the ^X notation.
+    // - DEL (character 127) is displayed as ^?.
+    // - Values above 128 are either meta characters (if the screen has not been initialized, or if meta has been called with a TRUE parameter), shown in the M-X notation, or are displayed as themselves. In the latter case, the values may not be printable; this follows the X/Open specification.
+    // - Values above 256 may be the names of the names of function keys.
+    // - Otherwise (if there is no corresponding name) the function returns null, to denote an error. X/Open also lists an "UNKNOWN KEY" return value, which some implementations return rather than null. 
+	keyname :: proc(c: c.int) -> cstring ---
 }
 
 // down-arrow key 
